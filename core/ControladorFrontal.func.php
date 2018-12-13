@@ -1,7 +1,8 @@
 <?php
 //FUNCIONES PARA EL CONTROLADOR FRONTAL
 /**
-Ahora crearemos el fichero ControladorFrontal.func.php que tiene las funciones que se encargan de cargar un controlador u otro y una acción u otra en función de lo que se le diga por la url.
+Ahora crearemos el fichero ControladorFrontal.func.php que tiene las funciones que
+ *  se encargan de cargar un controlador u otro y una acción u otra en función de lo que se le diga por la url.
 */
  
 function cargarControlador($controller){

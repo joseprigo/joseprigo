@@ -4,11 +4,11 @@ La siguiente clase que crearemos es ControladoresBase de la cual heredarán los
  * controladores, esta clase carga EntidadesBase, ModelosBase, y todos los 
  * modelos creados dentro del directorio model.
 */
-class ControladorBase{
+class BaseController{
  
     public function __construct() {
         require_once 'BaseEntity.php';
-        require_once 'ModeloBase.php';
+        require_once 'BaseModel.php';
          
         //Incluir todos los modelos
         foreach(glob("model/*.php") as $file){

@@ -34,11 +34,8 @@ class ArticleModel extends BaseModel{
         $noticies=$this->select($query, $a_params);
         return $noticies;
     }
-    public function selectAll(){
-        $str_type = "i";
-        $lang_id = 94;
-        $a_params = array($str_type, $lang_id);
-        $query = "SELECT news.id_article, news.edit, news_lang.text_utf8 FROM `news`
+    public function selectAll($a_params){
+        $query = "SELECT news.id_article, news.edit, news_lang.text FROM `news`
         LEFT JOIN news_lang USING(id_article)
         WHERE id_lang = ?";
         $news=$this->select($query, $a_params);

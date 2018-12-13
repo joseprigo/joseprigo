@@ -46,7 +46,7 @@ abstract class BaseModel{
     }
     
     abstract public function selectOne($params);
-    abstract public function selectAll();
+    abstract public function selectAll($params);
 //    public function ejecutarSql($query){
 //        $query=$this->db()->query($query);
 //        if($query==true){
