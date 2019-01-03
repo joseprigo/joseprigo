@@ -25,8 +25,8 @@ class  FrontController{
      * @return \controlador
      */
     public function loadController(){
-        if (isset($_GET["controller"])){
-            $controller = $_GET["controller"];
+        if (filter_input(INPUT_GET,"controller") != null){
+            $controller = filter_input(INPUT_GET,"controller");
         }else{
             $controller = $this->DEFAULT_CONTROLLER;
         }
@@ -47,8 +47,8 @@ class  FrontController{
     }
     
     public function launchAction($controllerObj){
-        if(isset($_GET["action"]) && method_exists($controllerObj, $_GET["action"])){
-            $this->loadAction($controllerObj, $_GET["action"]);
+        if(isset($_GET["action"]) && method_exists($controllerObj, filter_input(INPUT_GET,"action"))){
+            $this->loadAction($controllerObj, filter_input(INPUT_GET,"action"));
         }else{
             $this->loadAction($controllerObj, $this->DEFAULT_ACTION);
         }

@@ -6,17 +6,18 @@ class NewsController extends BaseController{
     }
      
     public function index(){
-         
-        //Creamos el objeto usuario
-        $usuario=new Usuario();
-         
-        //Conseguimos todos los usuarios
-        $allusers=$usuario->getAll();
+        
+        $lang_id = 18;
+        $str_type = "i";
+        $a_params = array($str_type, $lang_id);
+        $article = new ArticleModel();
+        $arts = $article->selectAll($a_params);
+    
         
         //Cargamos la vista index y le pasamos valores
         $this->view("index",array(
-            "allusers"=>$allusers,
-            "Hola"    =>"Soy Víctor Robles"
+            "allArt" => $arts,
+            "Hola"   => "Soy Josep Rigo"
         ));
     }
      
@@ -43,14 +44,6 @@ class NewsController extends BaseController{
         }
         $this->redirect();
     }
-     
-     
-    public function hola(){
-        $usuarios=new UsuariosModel();
-        $usu=$usuarios->getUnUsuario();
-        var_dump($usu);
-    }
-    
     public function getArticle(){
         
         if(isset($_GET["lang"])){ 
@@ -72,14 +65,15 @@ class NewsController extends BaseController{
         if(isset($_GET["lang"])){ 
             $lang_id =(int)$_GET["lang"];
         }else{
-            $lang_id = 94;
+            $lang_id = 18;
         }
         $str_type = "i";
         $a_params = array($str_type, $lang_id);
         $article = new ArticleModel();
         $arts = $article->selectAll($a_params);
-        return json_encode($arts);
+        print json_encode($arts);
     }
+    
  
 }
 ?>

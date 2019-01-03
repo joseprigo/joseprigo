@@ -16,7 +16,7 @@ class ArticleModel extends BaseModel{
      * @return boolean
      */
     public function selectOne($a_params){
-        $query = "SELECT news.id_article, news.creation, news.edit, news_lang.text FROM news
+        $query = "SELECT news.id_article, news.creation, news.edit, news_lang.title, news_lang.text FROM news
                 left join news_lang USING(id_article)
                 WHERE news_lang.id_lang = ?
                 AND id_article = ?";
@@ -28,14 +28,21 @@ class ArticleModel extends BaseModel{
 //        $str_type = "i";
 //        $lang_id = 94;
 //        $a_params = array($str_type, $lang_id);
-        $query="SELECT news.id_article, news.creation, news.edit, news_lang.text FROM news
+        $query="SELECT news.id_article, news.creation, news.edit, news_lang.title, news_lang.text FROM news
                 left join news_lang USING(id_article)
                 WHERE news_lang.id_lang = ?";
         $noticies=$this->select($query, $a_params);
         return $noticies;
     }
+    
+    /**
+     * S'utilitza al carregar tots els articles en un idioma concret, per exemple
+     * al carregar l'index del lloc web.
+     * @param type $a_params
+     * @return type
+     */
     public function selectAll($a_params){
-        $query = "SELECT news.id_article, news.edit, news_lang.text FROM `news`
+        $query = "SELECT news.id_article, news.creation, news.edit, news_lang.title, news_lang.text FROM `news`
         LEFT JOIN news_lang USING(id_article)
         WHERE id_lang = ?";
         $news=$this->select($query, $a_params);

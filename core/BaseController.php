@@ -25,15 +25,14 @@ class BaseController{
 * vistas y carga la vista que le llega como parámetro. En resumen un método para
 * renderizar vistas.
 */
-    public function view($vista,$datos){
-        foreach ($datos as $id_assoc => $valor) {
-            ${$id_assoc}=$valor; 
+    public function view($name, $data){
+        foreach ($data as $id_assoc => $value) {
+            ${$id_assoc} = $value; 
         }
-         
-        require_once 'core/AyudaVistas.php';
-        $helper=new AyudaVistas();
+//        require_once 'core/AyudaVistas.php';
+//        $helper=new AyudaVistas();
      
-        require_once 'view/'.$vista.'View.php';
+        require_once 'view/'.$name.'View.php';
     }
      
     public function redirect($controlador=CONTROLADOR_DEFECTO,$accion=ACCION_DEFECTO){
@@ -41,6 +40,9 @@ class BaseController{
     }
      
     //Métodos para los controladores
+    public function baseTest(){
+        print json_encode(array("msg"=>"hola"));
+    }
  
 }
 ?>
