@@ -16,12 +16,18 @@ class ArticleModel extends BaseModel{
      * @return boolean
      */
     public function selectOne($a_params){
-        $query = "SELECT news.id_article, news.creation, news.edit, news_lang.title, news_lang.text FROM news
+        $queryText = "SELECT news.id_article, news.creation, news.edit, news_lang.title, news_lang.text FROM news
                 left join news_lang USING(id_article)
                 WHERE news_lang.id_lang = ?
                 AND id_article = ?";
-        $article = $this->select($query,$a_params);
-        return $article;
+        $queryMedia = "SELECT media.id_media, media.name, media.type, media.priority, media.link, media_lang.media_description
+                FROM m edia LEFT join media_lang USING (id_media)
+                WHERE media_lang.id_lang = ?
+                AND id_article = ?
+                ORDER BY media.type, media.priority";
+        $article = $this->select($queryText,$a_params);
+        $medias = $this->select($queryMedia, $a_params);
+        return array("body" => $article, "resources" => $medias);
     }
     
     public function selectMany($a_params){
@@ -44,7 +50,8 @@ class ArticleModel extends BaseModel{
     public function selectAll($a_params){
         $query = "SELECT news.id_article, news.creation, news.edit, news_lang.title, news_lang.text FROM `news`
         LEFT JOIN news_lang USING(id_article)
-        WHERE id_lang = ?";
+        WHERE id_lang = ?
+        ORDER BY news.creation DESC";
         $news=$this->select($query, $a_params);
         return $news;
         

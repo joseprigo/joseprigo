@@ -1,5 +1,5 @@
 <?php
-class NewsController extends BaseController{
+class ArticleController extends BaseController{
      
     public function __construct() {
         parent::__construct();
@@ -57,7 +57,7 @@ class NewsController extends BaseController{
         $a_params = array($str_type, $lang_id, $article_id);
         $article = new ArticleModel();
         $art = $article->selectOne($a_params);
-        var_dump($art);
+        print json_encode($art);
         
     }
     
